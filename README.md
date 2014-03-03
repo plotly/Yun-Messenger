@@ -5,7 +5,9 @@ Communicate messages from the Arduino ATmega32u4 microcontroller to Python progr
 It's as simple as:
 
 ```
-Messenger.send("my_subscriber", "my message contents");
+void setup(){
+    Messenger.send("my_subscriber", "my message contents");
+}
 ```
 
 and in Python on the Linino:
