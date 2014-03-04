@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 class Event(dict):
     """Event subscription with event names as keys
 

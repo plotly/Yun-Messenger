@@ -3,12 +3,13 @@
 from Event import Event
 from socket import socket, AF_INET, SOCK_STREAM
 
+import traceback
+
 class SERIAL:
     class MSG:
         NAME            = chr(29)
         DATA            = chr(30)
         END             = chr(31)
-
 
 class Console(object):
     pass
@@ -28,6 +29,9 @@ class Console(object):
         try:
             new_data = self.console.recv(1024)
         except:
+            print 'error recv\'ing'
+            print traceback.format_exc()
+            self.console.close()
             self.connected = False
             return None
 
@@ -67,14 +71,21 @@ class Console(object):
             self.msg_buffer = ""
 
     def run(self):
+        print 'connecting'
+        self.serversock = socket(AF_INET, SOCK_STREAM)
+        print 'binding'
+        self.serversock.bind(('localhost', 6575))
+        print 'listening'
+        self.serversock.listen(1)
+
         while 1:
             if self.connected:
+                print 'reading'
                 self.read()
             else:
-                self.console = socket(AF_INET, SOCK_STREAM)
-                self.console.bind(('localhost', 6571))
-                self.console.listen(1)
+                print 'accepting'
                 self.connected = True
+                (self.console, address) = self.serversock.accept()
 
     def log(self, message):
         # TODO: user defined loggers
