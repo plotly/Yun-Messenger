@@ -4,7 +4,7 @@ Communicate messages from the Arduino ATmega32u4 microcontroller to Python progr
 
 It's as simple as:
 
-```
+```C
 #include <Messenger.h>
 
 void setup(){
@@ -13,7 +13,7 @@ void setup(){
 ```
 
 and in Python on the Linino:
-```
+```python
 import yunMessenger
 
 ym = yunMessenger()
