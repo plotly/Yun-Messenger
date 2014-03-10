@@ -25,5 +25,7 @@ def myMessageHandler(msg):
 
 ```
 
+Or, with multiple subscribers
+
 ## Credits
 The Console object adapted from [Spacebrew's awesome project](https://github.com/julioterra/yunSpacebrew)
