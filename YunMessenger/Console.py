@@ -28,6 +28,7 @@ class Console(object):
         # wait here for messages
         try:
             new_data = self.console.recv(1024)
+            print 'new_data: ', new_data
         except:
             print 'error recv\'ing'
             print traceback.format_exc()
@@ -66,26 +67,40 @@ class Console(object):
                     self.onMessage(publish_route, msg)
                 except Exception:
                     error_msg = "issue sending message, route: " + publish_route + "\n"
+                    self.log(traceback.format_exc())
                     self.log(error_msg)
 
             self.msg_buffer = ""
 
     def run(self):
         print 'connecting'
+
+        '''
         self.serversock = socket(AF_INET, SOCK_STREAM)
         print 'binding'
-        self.serversock.bind(('localhost', 6575))
+        self.serversock.bind(('localhost', 6571))
         print 'listening'
         self.serversock.listen(1)
+        '''
+
+        self.console = socket(AF_INET, SOCK_STREAM)
+        print 'connectingz'
+        self.console.connect(('localhost', 6571))
+        self.connected = True
 
         while 1:
             if self.connected:
                 print 'reading'
                 self.read()
             else:
+                self.console.close()
+                self.console.connect(('localhost', 6571))
+                self.connected = True
+                '''
                 print 'accepting'
                 self.connected = True
                 (self.console, address) = self.serversock.accept()
+                '''
 
     def log(self, message):
         # TODO: user defined loggers

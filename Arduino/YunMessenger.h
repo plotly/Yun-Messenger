@@ -3,6 +3,7 @@
 
 class Messenger {
     public:
+        Messenger();
         send(char *subscriber, char *message);
     private:
 
