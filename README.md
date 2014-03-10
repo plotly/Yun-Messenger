@@ -26,6 +26,14 @@ def myMessageHandler(msg):
 ```
 
 Or, with multiple subscribers
+```C
+#include <Messenger.h>
+
+void setup(){
+    Messenger.send("subscriber_1", "my message contents");
+    Messenger.send("subscriber_2", "my message contents");
+}
+```
 
 ## Credits
 The Console object adapted from [Spacebrew's awesome project](https://github.com/julioterra/yunSpacebrew)
