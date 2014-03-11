@@ -67,9 +67,7 @@ class Console(object):
             self.msg_buffer = ""
 
     def run(self):
-        self.console = socket(AF_INET, SOCK_STREAM)
-        self.connected = False        
-
+        self.connected = False
         while 1:
             if self.connected:
                 self.read()
@@ -78,6 +76,7 @@ class Console(object):
                     time.sleep(1)
                     self.logger.info("Attempting to connect to localhost:6571")
                     self.console.close()
+                    self.console = socket(AF_INET, SOCK_STREAM)                    
                     self.console.connect(('localhost', 6571))
                     self.logger.info("Connected to localhost:6571")
                     self.connected = True
