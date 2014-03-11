@@ -4,7 +4,7 @@
 from Event import Event
 from SERIAL import SERIAL
 from socket import socket, AF_INET, SOCK_STREAM
-from Logger import logger
+from Logger import Logger
 
 import traceback
 import time
@@ -27,8 +27,8 @@ class Console(object):
         try:
             new_data = self.console.recv(1024)
         except:
-            logger.error("Console.recv failed, closing connection")
-            logger.debug("Traceback: {traceback}".format(traceback=traceback.format_exc()))
+            Logger.logger.error("Console.recv failed, closing connection")
+            Logger.logger.debug("Traceback: {traceback}".format(traceback=traceback.format_exc()))
             self.console.close()
             self.connected = False
             return None
@@ -40,7 +40,7 @@ class Console(object):
 
         if new_data == '':
             # client closed the connection
-            logger.info("Socket connection closed")
+            Logger.logger.info("Socket connection closed")
             self.console.close()
             self.connected = False
             return None
@@ -59,10 +59,10 @@ class Console(object):
                 try:
                     self.onMessage(publish_route, msg)
                 except Exception:
-                    logger.error("Publishing the following message "\
+                    Logger.logger.error("Publishing the following message "\
                                 "to subscriber \"{subscriber}\" failed:\n{message}"\
                                 .format(subscriber=publish_route, message=msg))
-                    logger.debug("Traceback: \n{traceback}".format(traceback=traceback.format_exc()))
+                    Logger.logger.debug("Traceback: \n{traceback}".format(traceback=traceback.format_exc()))
 
             self.msg_buffer = ""
 
@@ -76,13 +76,13 @@ class Console(object):
             else:
                 try:
                     time.sleep(0.5)
-                    self.logger.info("Attempting to connect to localhost:6571")
+                    self.Logger.logger.info("Attempting to connect to localhost:6571")
                     self.console.close()
                     self.console.connect(('localhost', 6571))
-                    self.logger.info("Connected to localhost:6571")
+                    self.Logger.logger.info("Connected to localhost:6571")
                     self.connected = True
                 except KeyboardInterrupt:
-                    self.logger.info("KeyboardInterrupt, exiting")
+                    self.Logger.logger.info("KeyboardInterrupt, exiting")
                     break
                 except:
-                    self.logger.error("Can't connect to localhost:6571")
+                    self.Logger.logger.error("Can't connect to localhost:6571")
