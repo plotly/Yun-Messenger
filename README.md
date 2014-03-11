@@ -9,10 +9,11 @@ The YunMessenger simplifies communication from the Arduino ATmega32u4 microcontr
 It's as simple as:
 
 ```C
-#include <Messenger.h>
+#include <YunMessenger.h>
 
 void setup(){
-    Messenger.send("my_subscriber", "my message contents");
+    Messenger m;
+    m.send("my_subscriber", "my message contents");
 }
 ```
 
@@ -32,11 +33,12 @@ console.run()
 
 Or, with multiple subscribers
 ```C
-#include <Messenger.h>
+#include <YunMessenger.h>
 
 void setup(){
-    Messenger.send("subscriber_1", "my message contents");
-    Messenger.send("subscriber_2", "my message contents");
+    Messenger m;
+    m.send("subscriber_1", "my message contents");
+    m.send("subscriber_2", "my message contents");
 }
 ```
 
