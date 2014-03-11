@@ -1,15 +1,13 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 from Event import Event
+from SERIAL import SERIAL
 from socket import socket, AF_INET, SOCK_STREAM
+from Logger import logger
 
 import traceback
-
-class SERIAL:
-    class MSG:
-        NAME            = chr(29)
-        DATA            = chr(30)
-        END             = chr(31)
+import time
 
 class Console(object):
     pass
@@ -28,23 +26,21 @@ class Console(object):
         # wait here for messages
         try:
             new_data = self.console.recv(1024)
-            print 'new_data: ', new_data
         except:
-            print 'error recv\'ing'
-            print traceback.format_exc()
+            logger.error("Console.recv failed, closing connection")
+            logger.debug("Traceback: {traceback}".format(traceback=traceback.format_exc()))
             self.console.close()
             self.connected = False
             return None
 
         # if new data was received then add it buffer and check if end message was provided
         if new_data:
-            print new_data
             self.msg_buffer += new_data
             index_end = self.msg_buffer.find(SERIAL.MSG.END)
 
         if new_data == '':
             # client closed the connection
-            print 'closing'
+            logger.info("Socket connection closed")
             self.console.close()
             self.connected = False
             return None
@@ -58,50 +54,35 @@ class Console(object):
             msg = ""
 
             if index_name >= 0 and index_msg > index_name:
-                print 'Found index markers'
                 publish_route = self.msg_buffer[(index_name + 1):index_msg]
-                msg = self.msg_buffer[(index_msg + 1):index_end]
-                print 'publish_route:', publish_route, 'msg:', msg
-                
+                msg = self.msg_buffer[(index_msg + 1):index_end]                
                 try:
                     self.onMessage(publish_route, msg)
                 except Exception:
-                    error_msg = "issue sending message, route: " + publish_route + "\n"
-                    self.log(traceback.format_exc())
-                    self.log(error_msg)
+                    logger.error("Publishing the following message "\
+                                "to subscriber \"{subscriber}\" failed:\n{message}"\
+                                .format(subscriber=publish_route, message=msg))
+                    logger.debug("Traceback: \n{traceback}".format(traceback=traceback.format_exc()))
 
             self.msg_buffer = ""
 
     def run(self):
-        print 'connecting'
-
-        '''
-        self.serversock = socket(AF_INET, SOCK_STREAM)
-        print 'binding'
-        self.serversock.bind(('localhost', 6571))
-        print 'listening'
-        self.serversock.listen(1)
-        '''
-
         self.console = socket(AF_INET, SOCK_STREAM)
-        print 'connectingz'
-        self.console.connect(('localhost', 6571))
-        self.connected = True
+        self.connected = False        
 
         while 1:
             if self.connected:
-                print 'reading'
                 self.read()
             else:
-                self.console.close()
-                self.console.connect(('localhost', 6571))
-                self.connected = True
-                '''
-                print 'accepting'
-                self.connected = True
-                (self.console, address) = self.serversock.accept()
-                '''
-
-    def log(self, message):
-        # TODO: user defined loggers
-        print message
+                try:
+                    time.sleep(0.5)
+                    self.logger.info("Attempting to connect to localhost:6571")
+                    self.console.close()
+                    self.console.connect(('localhost', 6571))
+                    self.logger.info("Connected to localhost:6571")
+                    self.connected = True
+                except KeyboardInterrupt:
+                    self.logger.info("KeyboardInterrupt, exiting")
+                    break
+                except:
+                    self.logger.error("Can't connect to localhost:6571")
