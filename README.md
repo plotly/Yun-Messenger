@@ -90,7 +90,10 @@ It was developed for [Plotly's real-time plotting library on the Yún](https://g
 You can start your Python program from your Yún with the `Process` module:
 ```C
 void setup(){
-    Process.run("python ~/example.py");
+    Process p;
+    p.begin("/usr/bin/python");
+    p.addParameter("/root/example.py"); 
+    p.runAsynchronously();
 }
 ```
 
