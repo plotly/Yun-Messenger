@@ -1,4 +1,4 @@
-## Yun-Messenger
+## YunMessenger
 
 Arduino's `Bridge` abstraction opens up communication between the Yún and the Linino, but using it in your Python programs is a ton of work: you have to set up TCP sockets and parse streaming data. And since all of the communication is over this TCP socket on port 6571 on `localhost`, multiple subscribers can't tune in if they don't know which message is for whom.
 
