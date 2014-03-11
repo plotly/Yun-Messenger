@@ -18,14 +18,16 @@ void setup(){
 
 and in your Python on the Linino:
 ```python
-from yunMessenger import Console
+from YunMessenger import Console
 
 console = Console.Console()
 
-console.onMessage['my_subscriber'] = myMessageHandler
-
 def myMessageHandler(msg):
     print msg
+
+console.onMessage['my_subscriber'] = myMessageHandler
+
+
 
 console.run()
 ```
@@ -41,18 +43,18 @@ void setup(){
 ```
 
 ```python
-from yunMessenger import Console
+from YunMessenger import Console
 
 console = Console.Console()
-
-console.onMessage['subscriber_1'] = messageHandler1
-console.onMessage['subscriber_1'] = messageHandler2
 
 def messageHandler1(msg):
     print 'Handler 1! ', msg
 
 def messageHandler2(msg):
     print 'Handler 2! ', msg
+
+console.onMessage['subscriber_1'] = messageHandler1
+console.onMessage['subscriber_1'] = messageHandler2
 
 ```
 
