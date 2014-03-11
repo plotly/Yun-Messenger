@@ -75,7 +75,7 @@ class Console(object):
                 self.read()
             else:
                 try:
-                    time.sleep(0.5)
+                    time.sleep(1)
                     self.logger.info("Attempting to connect to localhost:6571")
                     self.console.close()
                     self.console.connect(('localhost', 6571))
@@ -86,3 +86,9 @@ class Console(object):
                     break
                 except:
                     self.logger.error("Can't connect to localhost:6571")
+                    self.logger.debug(traceback.format_exc())                    
+
+
+
+
+

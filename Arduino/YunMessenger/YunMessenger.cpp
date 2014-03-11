@@ -1,6 +1,10 @@
 #include "YunMessenger.h"
+#include <Bridge.h>
+#include <Console.h>
 
-void Messenger::Messenger(){
+#include "Arduino.h"
+
+Messenger::Messenger(){
     Console.buffer(64);
 }
 
