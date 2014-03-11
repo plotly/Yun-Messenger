@@ -77,6 +77,7 @@ It was developed for [Plotly's real-time plotting library on the Yún](https://g
     [...]
     root@Arduino:~# python example.py
     ```
+
     And that's it! You've successfully communicated a message between your Yún and a Python program on your Linino. 
 
 ### Running the messenger in the background
