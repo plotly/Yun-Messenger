@@ -54,6 +54,7 @@ def messageHandler2(msg):
 console.onMessage['subscriber_1'] = messageHandler1
 console.onMessage['subscriber_1'] = messageHandler2
 
+console.run()
 ```
 
 It was developed for [Plotly's real-time plotting library on the Yún](https://github.com/plotly/arduino-api/tree/master/plotly_yun).
