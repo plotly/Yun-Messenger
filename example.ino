@@ -17,8 +17,8 @@ void setup() {
     delay(2000);    
 
 
-    YunMessenger ym;
+    Messenger m;
     // Send Message to subscriber "subscriber_1"
-    ym.send("subscriber_1", "Hey subscriber_1!");
-    ym.send("subscriber_2", "Hey subscriber_2!");
+    m.send("subscriber_1", "Hey subscriber_1!");
+    m.send("subscriber_2", "Hey subscriber_2!");
 }
