@@ -16,6 +16,7 @@ class Console(object):
         self.connected = False
         self.msg_buffer = ""
         self.logger = Logger.logger
+        self.logger.info("Logger initiated")
         # Events
         self.onMessage = Event()
 
@@ -67,6 +68,7 @@ class Console(object):
             self.msg_buffer = ""
 
     def run(self):
+        self.logger.info("Run initiated")
         self.connected = False
         self.console = socket(AF_INET, SOCK_STREAM)
         while 1:
