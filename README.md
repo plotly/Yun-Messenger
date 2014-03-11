@@ -12,7 +12,7 @@ void setup(){
 }
 ```
 
-and in Python on the Linino:
+and in your Python on the Linino:
 ```python
 import yunMessenger
 
