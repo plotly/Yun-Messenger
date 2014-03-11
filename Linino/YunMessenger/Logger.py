@@ -2,7 +2,7 @@ import logging
 import logging.handlers
 
 class Logger:
-    file_name = 'YunMessenger.log'
+    file_name = '/root/YunMessenger.log'
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
     handler = logging.handlers.RotatingFileHandler(file_name, maxBytes=524288, backupCount=0)
