@@ -62,9 +62,9 @@ It was developed for [Plotly's real-time plotting library on the Yún](https://g
 
 1. Connect to your Yún to your local network
 2. Download this repository
-3. Copy the YunMessenger folder and the example script to your Yún. In your terminal, enter:
+3. Copy the YunMessenger folder and the example script to your Linino. In your terminal, enter:
     ```bash
-    $ scp -r YunMessenger root@arduino.local:/root/
+    $ scp -r YunMessenger/Linino/* root@arduino.local:YunMessenger/
     $ scp example.py root@arduino.local:/root/
     ```
 
