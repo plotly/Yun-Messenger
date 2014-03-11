@@ -51,6 +51,8 @@ def messageHandler2(msg):
 
 ```
 
+It works over Arduino's `Bridge` abstraction and saves you the hassle of opening TCP sockets, parsing streaming data, and communicating with several different subscribers. It was developed for [Plotly's real-time plotting library on the Yún](https://github.com/plotly/arduino-api/tree/master/plotly_yun).
+
 ## Getting Started
 
 1. Connect to your Yún to your local network
