@@ -80,6 +80,8 @@ It was developed for [Plotly's real-time plotting library on the Yún](https://g
     $ ssh root@arduino.local
     [...]
     root@Arduino:~# python example.py
+    Handler 1!  Hey subscriber_1!
+    Handler 2!  Hey subscriber_2!
     ```
 
     And that's it! You've successfully communicated a message between your Yún and a Python program on your Linino. 
