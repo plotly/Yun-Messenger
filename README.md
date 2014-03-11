@@ -53,7 +53,9 @@ def messageHandler2(msg):
 
 Arduino's `Bridge` abstraction opens up communication between the Yún and the Linino, but using it in your Python programs is a ton of work: you have to set up TCP sockets and parse streaming data. And since all of the communication is over this TCP socket on port 6571 on `localhost`, multiple subscribers can't tune in if they don't know which message is for whom.
 
-This library defines a simple communication protocal over this socket and an easy interface for subscribers to read messages written by the 3u25.
+It shouldn't be this hard, not on the Arduino.
+
+The YunMessenger providers the interface for easy communication between the two processors on the Yún.
 
 It was developed for [Plotly's real-time plotting library on the Yún](https://github.com/plotly/arduino-api/tree/master/plotly_yun).
 
