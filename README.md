@@ -37,8 +37,8 @@ Or, with multiple subscribers
 
 void setup(){
     Messenger m;
-    m.send("subscriber_1", "my message contents");
-    m.send("subscriber_2", "my message contents");
+    m.send("subscriber_1", "Hey subscriber_1!");
+    m.send("subscriber_2", "Hey subscriber_2!");
 }
 ```
 
