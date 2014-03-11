@@ -27,8 +27,6 @@ def myMessageHandler(msg):
 
 console.onMessage['my_subscriber'] = myMessageHandler
 
-
-
 console.run()
 ```
 
