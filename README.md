@@ -35,5 +35,23 @@ void setup(){
 }
 ```
 
+```python
+import yunMessenger
+
+ym = yunMessenger()
+
+ym.onMessage['subscriber_1'] = messageHandler1
+ym.onMessage['subscriber_1'] = messageHandler2
+
+def messageHandler1(msg):
+    print 'Handler 1! ', msg
+
+def messageHandler2(msg):
+    print 'Handler 2! ', msg
+
+
+```
+
+
 ## Credits
 The Console object adapted from [Spacebrew's awesome project](https://github.com/julioterra/yunSpacebrew)
