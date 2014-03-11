@@ -93,17 +93,17 @@ void setup(){
 ### Debugging and Logging
 On the Linino, status updates, warnings, and errors are written to a file called `YunMessenger.log`. This file is capped at 0.5MB. 
 ```bash
-root@Arduino:~# cat YunMessenger/YunMessenger.log
+root@Arduino:~# cat YunMessenger.log
 [...]
 ```
 The file might have a ton of lines and be overwhelming to look at. To check out just the last 50 lines, try:
 ```
-root@Arduino:~# tail -n100 YunMessenger/YunMessenger.log
+root@Arduino:~# tail -n100 YunMessenger.log
 [...]
 ```
 To watch the messages as they're being written to the file in real time, try:
 ```
-root@Arduino:~# tail -f YunMessenger/YunMessenger.log
+root@Arduino:~# tail -f YunMessenger.log
 [...]
 ```
 
