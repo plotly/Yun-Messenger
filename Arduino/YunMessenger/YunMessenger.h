@@ -6,10 +6,12 @@
 
 #include "Arduino.h"
 
-class Messenger {
+class Messenger : public ConsoleClass{
     public:
         Messenger();
-        void send(char *subscriber, char *message);
+        static void send(char *subscriber, char *message);
+        static void open(char *subscriber);
+        static void close();
 };
 
 #endif
