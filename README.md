@@ -142,7 +142,18 @@ root@Arduino:~# tail -n100 YunMessenger.log
 To watch the messages as they're being written to the file in real time, try:
 ```
 root@Arduino:~# tail -f YunMessenger.log
-[...]
+
+2014-03-12 01:35:35 INFO: Attempting to connect to localhost:6571
+2014-03-12 01:35:35 ERROR: Can't connect to localhost:6571
+2014-03-12 01:35:35 DEBUG: Traceback (most recent call last):
+  File "/root/YunMessenger/Console.py", line 83, in run
+    self.console.connect(('localhost', 6571))
+  File "/usr/lib/python2.7/socket.py", line 224, in meth
+    return getattr(self._sock,name)(*args)
+error: [Errno 146] Connection refused
+
+2014-03-12 01:35:36 INFO: Attempting to connect to localhost:6571
+2014-03-12 01:35:36 INFO: Connected to localhost:6571
 ```
 
 ## How does this work?
