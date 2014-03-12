@@ -36,9 +36,8 @@ Or, with multiple subscribers
 #include <YunMessenger.h>
 
 void setup(){
-    Messenger m;
-    m.send("subscriber_1", "Hey subscriber_1!");
-    m.send("subscriber_2", "Hey subscriber_2!");
+    Messenger.send("subscriber_1", "Hey subscriber_1!");
+    Messenger.send("subscriber_2", "Hey subscriber_2!");
 }
 ```
 
@@ -57,6 +56,42 @@ console.onMessage['subscriber_1'] = messageHandler1
 console.onMessage['subscriber_2'] = messageHandler2
 
 console.run()
+```
+
+Or, open a message and write to it with `Console.print`
+```C
+#include <Bridge.h>
+#include <Console.h>
+#include <YunMessenger.h>
+
+void setup() { 
+
+    // start-up the bridge
+    Bridge.begin();
+
+    delay(2000);
+    Console.begin();
+    while (!Console) {
+      ; // wait for Console port to connect.
+    }
+    
+    Console.buffer(64);
+    delay(2000);    
+
+    // "open" a message, write to it, then close it
+    // Anything that you write to the Console after you've 
+    // opened the message will get sent to the Linino
+    // and read by your Linino subscriber:
+    Messenger.open("subscriber_1");
+    Console.print("Here is another message");
+    Console.println(" with mixed types: ");
+    Console.print("float: ")
+    Console.println(1.55332);
+    Console.print("int: ")
+    Console.println(1);
+    Message.close();
+}
+
 ```
 
 It was developed for [Plotly's real-time plotting library on the Yún](https://github.com/plotly/arduino-api/tree/master/plotly_yun).
@@ -82,6 +117,9 @@ It was developed for [Plotly's real-time plotting library on the Yún](https://g
     root@Arduino:~# python example.py
     Handler 1!  Hey subscriber_1!
     Handler 2!  Hey subscriber_2!
+    Handler 1! Here is another message with mixed types:
+    float: 1.55332
+    int: 1
     ```
 
     And that's it! You've successfully communicated a message between your Yún and a Python program on your Linino. 
