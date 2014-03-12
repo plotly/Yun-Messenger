@@ -87,15 +87,46 @@ It was developed for [Plotly's real-time plotting library on the Yún](https://g
     And that's it! You've successfully communicated a message between your Yún and a Python program on your Linino. 
 
 ### Running the messenger in the background
-You can start your Python program from your Yún with the `Process` module:
-```C
-void setup(){
-    Process p;
-    p.begin("/usr/bin/python");
-    p.addParameter("/root/example.py"); 
-    p.runAsynchronously();
-}
+You can run processes in the background by appending `&` to your bash commands:
+```bash
+root@Arduino:~# (python example.py)&
 ```
+
+Observer which processes are running with `top`:
+```bash
+root@Arduino:~# top
+
+Mem: 53728K used, 7404K free, 0K shrd, 5256K buff, 18404K cached
+CPU:   0% usr   9% sys   0% nic  90% idle   0% io   0% irq   0% sirq
+Load average: 0.39 0.35 0.33 1/52 14213
+  PID  PPID USER     STAT   VSZ %VSZ %CPU COMMAND
+14213 13667 root     R     1500   2%   9% top
+13705 13667 root     S    13924  23%   0% python example.py
+ 1530     1 nobody   S     2180   4%   0% avahi-daemon: running [Arduino.local]
+ 1502     1 root     S     1700   3%   0% /usr/sbin/dbus-daemon --system
+ 1167     1 root     S     1588   3%   0% wpa_supplicant -B -P /var/run/wifi-wl
+ 1493     1 root     S     1576   3%   0% /usr/sbin/uhttpd -f -h /www -r Arduin
+  574     1 root     S     1552   3%   0% {rcS} /bin/sh /etc/init.d/rcS S boot
+  731     1 root     S     1540   3%   0% /sbin/netifd
+  701     1 root     S     1512   2%   0% /sbin/syslogd -C16
+ 1251   731 root     S     1512   2%   0% udhcpc -p /var/run/udhcpc-wlan0.pid -
+ 1565     1 root     S N   1508   2%   0% {uSDaemon} /bin/sh /sbin/uSDaemon
+    1     0 root     S     1508   2%   0% init
+13667 13655 root     S     1508   2%   0% -ash
+13352 13335 root     S     1508   2%   0% -ash
+11639     1 root     S     1504   2%   0% /bin/ash --login
+  788   731 root     S     1504   2%   0% udhcpc -p /var/run/udhcpc-eth1.pid -s
+13369 13352 root     S     1504   2%   0% top
+ 1556     1 root     S     1504   2%   0% /usr/sbin/ntpd -n -p 0.openwrt.pool.n
+  845     1 root     S     1504   2%   0% /sbin/watchdog -t 5 /dev/watchdog
+```
+
+Kill these background processes with:
+```bash
+root@Arduino:~# kill -9 $(pgrep -f "python example.py")
+```
+    
+
 
 ### Debugging and Logging
 On the Linino, status updates, warnings, and errors are written to a file called `YunMessenger.log`. This file is capped at 0.5MB. 
